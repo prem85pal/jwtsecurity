@@ -1,7 +1,6 @@
 package com.jwtsecurity.config;
 
 import com.jwtsecurity.model.MyUserDetails;
-
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
