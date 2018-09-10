@@ -2,7 +2,7 @@ package com.jwtsecurity;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-public class ByCriptPassword {
+public class GetBCryptPasswordEncoder {
 
     public static void main(String[] args){
 
