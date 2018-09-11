@@ -20,5 +20,4 @@ public class JpaAuditConfig {
             return Optional.ofNullable(user.getUsername());
         };
     }
-
 }
