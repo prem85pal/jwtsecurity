@@ -1,17 +1,22 @@
 package com.jwtsecurity.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
-public class User extends BaseModel {
+@Table(indexes = {@Index(name = "index1", columnList = "id,username,password")})
+public class User extends Auditable<String> {
 
     private String username;
 
     private String password;
+
+    @ManyToMany
+    @JoinTable(name = "user_role",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id")})
+    Set<Role> roles;
 
     public String getUsername() {
         return username;
@@ -27,5 +32,13 @@ public class User extends BaseModel {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

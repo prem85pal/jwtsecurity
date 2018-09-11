@@ -1,23 +1,30 @@
 package com.jwtsecurity.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import com.jwtsecurity.enums.Roles;
+
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
-public class Role extends BaseModel {
+public class Role extends Auditable<String> {
 
     @Enumerated(EnumType.STRING)
-    private String name;
+    private Roles name;
 
     private String description;
 
-    public String getName() {
+    @ManyToMany
+    @JoinTable(name = "role_privilege",
+            joinColumns = {@JoinColumn(name = "role_id")},
+            inverseJoinColumns = {@JoinColumn(name = "privilege_id")})
+    Set<Privilege> privilege;
+
+    public Roles getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(Roles name) {
         this.name = name;
     }
 
@@ -27,5 +34,13 @@ public class Role extends BaseModel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<Privilege> getPrivilege() {
+        return privilege;
+    }
+
+    public void setPrivilege(Set<Privilege> privilege) {
+        this.privilege = privilege;
     }
 }
